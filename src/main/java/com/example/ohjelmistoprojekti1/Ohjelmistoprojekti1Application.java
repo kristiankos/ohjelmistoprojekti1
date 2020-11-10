@@ -29,10 +29,10 @@ public class Ohjelmistoprojekti1Application {
 			log.info("saving");
 			
 			ArrayList<String> list = new ArrayList<String>();
-			list.add("test");
-			list.add("etastata");
+			list.add("ON");
+			list.add("EI");
 			
-			qrepo.save(new Question("Title", list));
+			qrepo.save(new Question("Onko Arskalla hieno auto?", list));
 			
 			log.info("fetch a question");
 			for (Question question : qrepo.findAll()) {
