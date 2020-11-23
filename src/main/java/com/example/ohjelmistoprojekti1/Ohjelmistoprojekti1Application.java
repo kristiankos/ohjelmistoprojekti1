@@ -1,7 +1,5 @@
 package com.example.ohjelmistoprojekti1;
 
-import java.util.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -10,8 +8,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
+import com.example.ohjelmistoprojekti1.domain.Answer;
+import com.example.ohjelmistoprojekti1.domain.AnswerRepository;
+import com.example.ohjelmistoprojekti1.domain.Option;
+import com.example.ohjelmistoprojekti1.domain.OptionRepository;
 import com.example.ohjelmistoprojekti1.domain.Question;
 import com.example.ohjelmistoprojekti1.domain.QuestionRepository;
+import com.example.ohjelmistoprojekti1.domain.QuestionType;
+import com.example.ohjelmistoprojekti1.domain.QuestionTypeRepository;
+import com.example.ohjelmistoprojekti1.domain.Survey;
+import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
 
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
@@ -24,26 +30,72 @@ public class Ohjelmistoprojekti1Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(QuestionRepository qrepo) {
+	public CommandLineRunner demo(SurveyRepository survrepo, QuestionRepository qrepo, QuestionTypeRepository qtrepo, OptionRepository oprepo, AnswerRepository ansrepo) {
 		return (args) -> {
 			log.info("saving");
 			
-			ArrayList<String> list = new ArrayList<String>();
-			list.add("ON");
-			list.add("EI");
+//			ArrayList<String> list = new ArrayList<String>();
+//			list.add("ON");
+//			list.add("EI");
+//			
+//			qrepo.save(new Question("Onko Arskalla hieno auto?", list));
+//			
+//			ArrayList<String> list2 = new ArrayList<String>();
+//			list2.add("Hyvää");
+//			list2.add("Pahaa");
+//			
+//			qrepo.save(new Question("Mitä kuuluu?", list2));
+//			
+//			log.info("fetch a question");
+//			for (Question question : qrepo.findAll()) {
+//				log.info(question.toString());
+//			}
 			
-			qrepo.save(new Question("Onko Arskalla hieno auto?", list));
+			// Pari esimerkki kyselyä
+			Survey kysely1 = new Survey("Kyselyn1 otsikko");
+			survrepo.save(kysely1);
 			
-			ArrayList<String> list2 = new ArrayList<String>();
-			list2.add("Hyvää");
-			list2.add("Pahaa");
+			Survey kysely2 = new Survey("Kyselyn2 otsikko");
+			survrepo.save(kysely2);
 			
-			qrepo.save(new Question("Mitä kuuluu?", list2));
 			
-			log.info("fetch a question");
-			for (Question question : qrepo.findAll()) {
-				log.info(question.toString());
-			}
+			
+			
+			// kysymystyypit
+			QuestionType radio = new QuestionType("radio");
+			qtrepo.save(radio);
+			QuestionType checkbox = new QuestionType("checkbox");
+			qtrepo.save(checkbox);
+			QuestionType open = new QuestionType("open");
+			qtrepo.save(open);
+			QuestionType scale = new QuestionType("scale");
+			qtrepo.save(scale);
+			
+			
+			
+			Question kysymys1 = new Question(kysely1, radio, "Mitä kuuluu?");
+			qrepo.save(kysymys1);
+			
+			
+			Option hyvaa = new Option(kysymys1, "Hyvää");
+			oprepo.save(hyvaa);
+			Option pahaa = new Option(kysymys1, "Pahaa");
+			oprepo.save(pahaa);
+			Option eos = new Option(kysymys1, "En osaa sanoa");
+			oprepo.save(eos);	
+			
+			
+			
+			Question kysymys2 = new Question(kysely1, radio, "Onko Arskalla hieno auto?");
+			qrepo.save(kysymys2);
+			Option ei = new Option(kysymys2, "Ei");
+			oprepo.save(ei);
+			
+			Option on = new Option(kysymys2, "On");
+			oprepo.save(on);
+			
+			Answer answer = new Answer(on);
+			ansrepo.save(answer);
 			
 		};
 	}
