@@ -13,29 +13,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ohjelmistoprojekti1.domain.Question;
-import com.example.ohjelmistoprojekti1.domain.QuestionRepository;
+import com.example.ohjelmistoprojekti1.domain.Survey;
+import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
 
 @RestController
-@RequestMapping("/questions")
-public class QuestionController {
+@RequestMapping(value = "/surveys")
+public class SurveyController {
 
 	@Autowired
-	private QuestionRepository qrepo;
-
+	SurveyRepository surveyrepo;
+	
+	@Autowired
+	QuestionController questioncontroller;
+	
 	@GetMapping
-	public List<Question> questionListRest() {
-		return (List<Question>) qrepo.findAll();
+	public List<Survey> surveyListRest(){
+		return (List<Survey>) surveyrepo.findAll();
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Question> findQuestionRest(@PathVariable Long id) {
-		return qrepo.findById(id);
+	public Optional<Survey> findSurveyRest(@PathVariable Long id) {
+		return surveyrepo.findById(id);
 	}
-
+	
+	@GetMapping("{id}/questions")
+	public List<Question> findQuestionsBySurveyRest(@PathVariable Long id) {
+		return findSurveyRest(id).get().getQuestions();
+	}
+	
 	@PostMapping
-	public @ResponseBody Question saveQuestionRest(@RequestBody Question question) {
-		return qrepo.save(question);
+	public @ResponseBody Survey saveSurveyRest(@RequestBody Survey survey) {
+		return surveyrepo.save(survey);
 	}
+	
 	
 	
 }

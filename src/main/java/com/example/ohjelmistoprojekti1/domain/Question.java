@@ -1,6 +1,5 @@
 package com.example.ohjelmistoprojekti1.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +22,7 @@ public class Question {
 	@ManyToOne
 	@JsonIgnoreProperties("questions")
 	private Survey survey;
-	
+
 	@ManyToOne
 	@JsonIgnoreProperties("questions")
 	private QuestionType questionType;
@@ -32,24 +31,30 @@ public class Question {
 	@JsonIgnoreProperties("question")
 	private List<Option> options;
 
-	
 	private String title;
-//	private ArrayList<String> body;
 
-	
-	
-	
-	
-	
 	public Question() {
 		super();
-//		this.title = null;
-//		this.body = new ArrayList<String>();
 	}
 
 	
 	
+	public Question(String title) {
+		super();
+		this.title = title;
+	}
+
 	
+
+
+	public Question(List<Option> options, String title) {
+		super();
+		this.options = options;
+		this.title = title;
+	}
+
+
+
 	public Question(Survey survey, QuestionType questionType, String title) {
 		super();
 		this.survey = survey;
@@ -57,17 +62,11 @@ public class Question {
 		this.title = title;
 	}
 
-
-
-
 	public Question(String title, QuestionType questionType) {
 		super();
 		this.title = title;
 		this.questionType = questionType;
 	}
-
-
-
 
 	public Question(Survey survey, QuestionType questionType, List<Option> options, String title) {
 		super();
@@ -77,14 +76,6 @@ public class Question {
 		this.title = title;
 	}
 
-
-
-
-	public Question(String title, ArrayList<String> body) {
-		super();
-		this.title = title;
-//		this.body = body;
-	}
 
 	public Long getQuestionid() {
 		return questionid;
@@ -102,61 +93,28 @@ public class Question {
 		this.title = title;
 	}
 
-
-
-
 	public Survey getSurvey() {
 		return survey;
 	}
-
-
-
 
 	public void setSurvey(Survey survey) {
 		this.survey = survey;
 	}
 
-
-
-
 	public List<Option> getOptions() {
 		return options;
 	}
-
-
-
 
 	public void setOptions(List<Option> options) {
 		this.options = options;
 	}
 
-
-
-
 	public QuestionType getQuestionType() {
 		return questionType;
 	}
 
-
-
-
 	public void setQuestionType(QuestionType questionType) {
 		this.questionType = questionType;
 	}
-	
-	
-
-//	public List<String> getBody() {
-//		return body;
-//	}
-
-//	public void setBody(ArrayList<String> body) {
-//		this.body = body;
-//	}
-
-//	@Override
-//	public String toString() {
-//		return "Question [questionid=" + questionid + ", title=" + title + ", body=" + body + "]";
-//	}
 
 }

@@ -34,22 +34,6 @@ public class Ohjelmistoprojekti1Application {
 		return (args) -> {
 			log.info("saving");
 			
-//			ArrayList<String> list = new ArrayList<String>();
-//			list.add("ON");
-//			list.add("EI");
-//			
-//			qrepo.save(new Question("Onko Arskalla hieno auto?", list));
-//			
-//			ArrayList<String> list2 = new ArrayList<String>();
-//			list2.add("Hyvää");
-//			list2.add("Pahaa");
-//			
-//			qrepo.save(new Question("Mitä kuuluu?", list2));
-//			
-//			log.info("fetch a question");
-//			for (Question question : qrepo.findAll()) {
-//				log.info(question.toString());
-//			}
 			
 			// Pari esimerkki kyselyä
 			Survey kysely1 = new Survey("Kyselyn1 otsikko");
@@ -90,9 +74,9 @@ public class Ohjelmistoprojekti1Application {
 			qrepo.save(kysymys2);
 			Option ei = new Option(kysymys2, "Ei");
 			oprepo.save(ei);
-			
 			Option on = new Option(kysymys2, "On");
 			oprepo.save(on);
+			
 			
 			Answer answer = new Answer(on);
 			ansrepo.save(answer);

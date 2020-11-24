@@ -23,7 +23,6 @@ public class Answer {
 	
 	public Answer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Answer(Option option) {
