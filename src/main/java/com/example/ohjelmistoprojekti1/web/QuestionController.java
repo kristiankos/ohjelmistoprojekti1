@@ -36,6 +36,6 @@ public class QuestionController {
 	public @ResponseBody Question saveQuestionRest(@RequestBody Question question) {
 		return qrepo.save(question);
 	}
-	
+
 	
 }

@@ -18,6 +18,8 @@ import com.example.ohjelmistoprojekti1.domain.QuestionType;
 import com.example.ohjelmistoprojekti1.domain.QuestionTypeRepository;
 import com.example.ohjelmistoprojekti1.domain.Survey;
 import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
+import com.example.ohjelmistoprojekti1.domain.User;
+import com.example.ohjelmistoprojekti1.domain.UserRepository;
 
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
@@ -30,10 +32,12 @@ public class Ohjelmistoprojekti1Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(SurveyRepository survrepo, QuestionRepository qrepo, QuestionTypeRepository qtrepo, OptionRepository oprepo, AnswerRepository ansrepo) {
+	public CommandLineRunner demo(SurveyRepository survrepo, QuestionRepository qrepo, QuestionTypeRepository qtrepo, OptionRepository oprepo, AnswerRepository ansrepo, UserRepository urepo) {
 		return (args) -> {
 			log.info("saving");
-			
+			//Luodaan admin käyttäjä
+			User admin = new User("admin","admin","ADMIN");
+			urepo.save(admin);
 			
 			// Pari esimerkki kyselyä
 			Survey kysely1 = new Survey("Kyselyn1 otsikko");
