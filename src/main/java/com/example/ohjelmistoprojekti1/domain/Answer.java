@@ -19,11 +19,20 @@ public class Answer {
 	@JsonIgnoreProperties("answers")
 	private Option option;
 
-	
+	private String value;
 	
 	public Answer() {
 		super();
 	}
+	
+	
+
+	public Answer(String value) {
+		super();
+		this.value = value;
+	}
+
+
 
 	public Answer(Option option) {
 		super();
@@ -46,10 +55,25 @@ public class Answer {
 		this.option = option;
 	}
 
+
+
+	public String getValue() {
+		return value;
+	}
+
+
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Answer [answerId=" + answerId + ", option=" + option + "]";
+		return "Answer [answerId=" + answerId + ", value=" + value + "]";
 	}
-	
+
+
 	
 }

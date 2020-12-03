@@ -74,16 +74,16 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-//			Question kysymys2 = new Question(kysely1, radio, "Onko Arskalla hieno auto?");
-//			qrepo.save(kysymys2);
-//			Option ei = new Option(kysymys2, "Ei");
-//			oprepo.save(ei);
-//			Option on = new Option(kysymys2, "On");
-//			oprepo.save(on);
+			Question kysymys2 = new Question(kysely1, radio, "Onko Arskalla hieno auto?");
+			qrepo.save(kysymys2);
+			Option ei = new Option(kysymys2, "Ei");
+			oprepo.save(ei);
+			Option on = new Option(kysymys2, "On");
+			oprepo.save(on);
 			
 			
-			//Answer answer = new Answer(on);
-//			ansrepo.save(answer);
+			Answer answer = new Answer(on);
+			ansrepo.save(answer);
 			
 		};
 	}
