@@ -3,6 +3,7 @@ package com.example.ohjelmistoprojekti1.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class AnswerController {
 		return (List<Answer>) answerrepo.findAll();
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public Answer saveAnswerRest(Answer answer) {
 		return answerrepo.save(answer);
