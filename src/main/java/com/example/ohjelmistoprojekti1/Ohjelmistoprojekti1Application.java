@@ -46,6 +46,15 @@ public class Ohjelmistoprojekti1Application {
 			Survey kysely2 = new Survey("Kyselyn2 otsikko");
 			survrepo.save(kysely2);
 			
+			Survey kysely3 = new Survey("Kyselyn3 otsikko");
+			survrepo.save(kysely3);
+			
+			Survey kysely4 = new Survey("Kyselyn4 otsikko");
+			survrepo.save(kysely4);
+			
+			Survey kysely5 = new Survey("Kyselyn5 otsikko");
+			survrepo.save(kysely5);
+			
 			
 			
 			
@@ -81,9 +90,9 @@ public class Ohjelmistoprojekti1Application {
 			Option on = new Option(kysymys2, "On");
 			oprepo.save(on);
 			
-			
-			Answer answer = new Answer(on);
-			ansrepo.save(answer);
+
+			Question kysymys3 = new Question(kysely2, scale, "Mikä fiilis?");
+			qrepo.save(kysymys3);
 			
 		};
 	}
