@@ -14,8 +14,7 @@ import com.example.ohjelmistoprojekti1.domain.Option;
 import com.example.ohjelmistoprojekti1.domain.OptionRepository;
 import com.example.ohjelmistoprojekti1.domain.Question;
 import com.example.ohjelmistoprojekti1.domain.QuestionRepository;
-import com.example.ohjelmistoprojekti1.domain.QuestionType;
-import com.example.ohjelmistoprojekti1.domain.QuestionTypeRepository;
+import com.example.ohjelmistoprojekti1.domain.QuestionTypeEnum;
 import com.example.ohjelmistoprojekti1.domain.Survey;
 import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
 import com.example.ohjelmistoprojekti1.domain.User;
@@ -31,8 +30,10 @@ public class Ohjelmistoprojekti1Application {
 		SpringApplication.run(Ohjelmistoprojekti1Application.class, args);
 	}
 
+	
+
 	@Bean
-	public CommandLineRunner demo(SurveyRepository survrepo, QuestionRepository qrepo, QuestionTypeRepository qtrepo, OptionRepository oprepo, AnswerRepository ansrepo, UserRepository urepo) {
+	public CommandLineRunner demo(SurveyRepository survrepo, QuestionRepository qrepo, OptionRepository oprepo, AnswerRepository ansrepo, UserRepository urepo) {
 		return (args) -> {
 			log.info("saving");
 			//Luodaan admin käyttäjä
@@ -56,21 +57,10 @@ public class Ohjelmistoprojekti1Application {
 			survrepo.save(kysely5);
 			
 			
+		
 			
-			
-			// kysymystyypit
-			QuestionType radio = new QuestionType("radio");
-			qtrepo.save(radio);
-			QuestionType checkbox = new QuestionType("checkbox");
-			qtrepo.save(checkbox);
-			QuestionType open = new QuestionType("open");
-			qtrepo.save(open);
-			QuestionType scale = new QuestionType("scale");
-			qtrepo.save(scale);
-			
-			
-			
-			Question kysymys1 = new Question(kysely1, radio, "Mitä kuuluu?");
+			QuestionTypeEnum RADIO = QuestionTypeEnum.RADIO;
+			Question kysymys1 = new Question(kysely1, RADIO, "Mitä kuuluu?");
 			qrepo.save(kysymys1);
 			
 			
@@ -83,7 +73,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-			Question kysymys2 = new Question(kysely1, radio, "Onko Arskalla hieno auto?");
+			Question kysymys2 = new Question(kysely1, RADIO, "Onko Arskalla hieno auto?");
 			qrepo.save(kysymys2);
 			Option ei = new Option(kysymys2, "Ei");
 			oprepo.save(ei);
@@ -91,8 +81,10 @@ public class Ohjelmistoprojekti1Application {
 			oprepo.save(on);
 			
 
+			QuestionTypeEnum scale = QuestionTypeEnum.SCALE;
 			Question kysymys3 = new Question(kysely2, scale, "Mikä fiilis?");
 			qrepo.save(kysymys3);
+
 			
 		};
 	}

@@ -19,6 +19,12 @@ public class Answer {
 	@JsonIgnoreProperties("answers")
 	private Option option;
 
+	
+	@ManyToOne
+	@JsonIgnoreProperties("answers")
+	private Question question;
+	
+	
 	private String value;
 	
 	public Answer() {
@@ -68,10 +74,24 @@ public class Answer {
 	}
 
 
+	
+
+	public Question getQuestion() {
+		return question;
+	}
+
+
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Answer [answerId=" + answerId + ", value=" + value + "]";
+		return "Answer [answerId=" + answerId + ", option=" + option + ", question=" + question + ", value=" + value
+				+ "]";
 	}
 
 

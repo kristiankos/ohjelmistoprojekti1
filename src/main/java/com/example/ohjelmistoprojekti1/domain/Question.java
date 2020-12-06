@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,13 +25,21 @@ public class Question {
 	@JsonIgnoreProperties("questions")
 	private Survey survey;
 
-	@ManyToOne
-	@JsonIgnoreProperties("questions")
-	private QuestionType questionType;
+//	@ManyToOne
+//	@JsonIgnoreProperties("questions")
+//	private QuestionType questionType;
+	
+	@Enumerated(EnumType.STRING)
+	private QuestionTypeEnum questiontype;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	@JsonIgnoreProperties("question")
 	private List<Option> options;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+	@JsonIgnoreProperties("question")
+	private List<Answer> answers;
 
 	private String title;
 
@@ -45,36 +55,37 @@ public class Question {
 	}
 
 	
+	
 
 
-	public Question(List<Option> options, String title) {
+	public Question(QuestionTypeEnum questiontype, String title) {
 		super();
-		this.options = options;
+		this.questiontype = questiontype;
 		this.title = title;
 	}
 
 
 
-	public Question(Survey survey, QuestionType questionType, String title) {
-		super();
-		this.survey = survey;
-		this.questionType = questionType;
-		this.title = title;
-	}
-
-	public Question(String title, QuestionType questionType) {
-		super();
-		this.title = title;
-		this.questionType = questionType;
-	}
-
-	public Question(Survey survey, QuestionType questionType, List<Option> options, String title) {
+	public Question(Survey survey, QuestionTypeEnum questiontype, List<Option> options, List<Answer> answers,
+			String title) {
 		super();
 		this.survey = survey;
-		this.questionType = questionType;
+		this.questiontype = questiontype;
 		this.options = options;
+		this.answers = answers;
 		this.title = title;
 	}
+
+
+
+
+	public Question(Survey survey, QuestionTypeEnum questiontype, String title) {
+		super();
+		this.survey = survey;
+		this.questiontype = questiontype;
+		this.title = title;
+	}
+
 
 
 	public Long getQuestionid() {
@@ -109,12 +120,31 @@ public class Question {
 		this.options = options;
 	}
 
-	public QuestionType getQuestionType() {
-		return questionType;
+
+	
+
+	public QuestionTypeEnum getQuestiontype() {
+		return questiontype;
 	}
 
-	public void setQuestionType(QuestionType questionType) {
-		this.questionType = questionType;
+
+
+	public void setQuestiontype(QuestionTypeEnum questiontype) {
+		this.questiontype = questiontype;
 	}
+
+
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+	
+	
 
 }
