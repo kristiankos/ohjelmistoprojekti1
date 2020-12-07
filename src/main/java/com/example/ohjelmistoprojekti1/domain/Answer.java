@@ -1,5 +1,6 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,17 +16,14 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long answerId;
 	
-	@ManyToOne
-	@JsonIgnoreProperties("answers")
-	private Option option;
-
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("answers")
 	private Question question;
 	
 	
 	private String value;
+	
 	
 	public Answer() {
 		super();
@@ -33,17 +31,19 @@ public class Answer {
 	
 	
 
-	public Answer(String value) {
+	public Answer(Question question, String value) {
 		super();
+		this.question = question;
 		this.value = value;
 	}
 
 
 
-	public Answer(Option option) {
+	public Answer(String value) {
 		super();
-		this.option = option;
+		this.value = value;
 	}
+
 
 	public Long getAnswerId() {
 		return answerId;
@@ -51,14 +51,6 @@ public class Answer {
 
 	public void setAnswerId(Long answerId) {
 		this.answerId = answerId;
-	}
-
-	public Option getOption() {
-		return option;
-	}
-
-	public void setOption(Option option) {
-		this.option = option;
 	}
 
 
@@ -90,7 +82,7 @@ public class Answer {
 
 	@Override
 	public String toString() {
-		return "Answer [answerId=" + answerId + ", option=" + option + ", question=" + question + ", value=" + value
+		return "Answer [answerId=" + answerId + ", question=" + question + ", value=" + value
 				+ "]";
 	}
 

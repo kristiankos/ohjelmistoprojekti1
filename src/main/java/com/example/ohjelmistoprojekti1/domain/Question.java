@@ -9,8 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -47,20 +49,21 @@ public class Question {
 		super();
 	}
 
-	
-	
-	public Question(String title) {
-		super();
-		this.title = title;
-	}
-
-	
-	
 
 
 	public Question(QuestionTypeEnum questiontype, String title) {
 		super();
 		this.questiontype = questiontype;
+		this.title = title;
+	}
+
+
+
+	public Question(Survey survey, QuestionTypeEnum questiontype, List<Option> options, String title) {
+		super();
+		this.survey = survey;
+		this.questiontype = questiontype;
+		this.options = options;
 		this.title = title;
 	}
 
@@ -143,6 +146,14 @@ public class Question {
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Question [questionid=" + questionid + ", survey=" + survey + ", questiontype=" + questiontype
+				+ ", options=" + options + ", answers=" + answers + ", title=" + title + "]";
 	}
 	
 	

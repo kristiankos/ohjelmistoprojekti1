@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,13 +26,10 @@ public class Option {
 	
 	private String value;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "option")
-	@JsonIgnoreProperties("option")
-	private List<Answer> answers;
-	
 	public Option() {
 		super();
 	}
+
 
 
 	public Option(Question question, String value) {
@@ -62,14 +60,6 @@ public class Option {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
 	}
 
 	@Override

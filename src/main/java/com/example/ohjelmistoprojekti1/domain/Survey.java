@@ -1,5 +1,6 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class Survey {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "survey")
 	@JsonIgnoreProperties("survey")
-	private List<Question> questions;
+	private List<Question> questions = new ArrayList<Question>();
 
 	
 	public Survey() {
@@ -33,6 +34,15 @@ public class Survey {
 	
 	
 	
+
+	public Survey(String title, List<Question> questions) {
+		super();
+		this.title = title;
+		this.questions = questions;
+	}
+
+
+
 
 	public Survey(String title) {
 		super();

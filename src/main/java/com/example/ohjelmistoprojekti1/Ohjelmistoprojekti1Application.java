@@ -1,5 +1,8 @@
 package com.example.ohjelmistoprojekti1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -59,8 +62,7 @@ public class Ohjelmistoprojekti1Application {
 			
 		
 			
-			QuestionTypeEnum RADIO = QuestionTypeEnum.RADIO;
-			Question kysymys1 = new Question(kysely1, RADIO, "Mitä kuuluu?");
+			Question kysymys1 = new Question(kysely1, QuestionTypeEnum.RADIO, "Mitä kuuluu?");
 			qrepo.save(kysymys1);
 			
 			
@@ -73,7 +75,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-			Question kysymys2 = new Question(kysely1, RADIO, "Onko Arskalla hieno auto?");
+			Question kysymys2 = new Question(kysely1, QuestionTypeEnum.RADIO, "Onko Arskalla hieno auto?");
 			qrepo.save(kysymys2);
 			Option ei = new Option(kysymys2, "Ei");
 			oprepo.save(ei);
@@ -81,9 +83,9 @@ public class Ohjelmistoprojekti1Application {
 			oprepo.save(on);
 			
 
-			QuestionTypeEnum scale = QuestionTypeEnum.SCALE;
-			Question kysymys3 = new Question(kysely2, scale, "Mikä fiilis?");
+			Question kysymys3 = new Question(kysely2, QuestionTypeEnum.SCALE, "Mikä fiilis?");
 			qrepo.save(kysymys3);
+
 
 			
 		};

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ohjelmistoprojekti1.domain.Option;
+import com.example.ohjelmistoprojekti1.domain.OptionRepository;
 import com.example.ohjelmistoprojekti1.domain.Question;
 import com.example.ohjelmistoprojekti1.domain.QuestionRepository;
 
@@ -21,6 +23,9 @@ public class QuestionController {
 
 	@Autowired
 	private QuestionRepository qrepo;
+	
+	@Autowired
+	private OptionRepository oprepo;
 
 	@GetMapping
 	public List<Question> questionListRest() {
@@ -36,6 +41,18 @@ public class QuestionController {
 	public @ResponseBody Question saveQuestionRest(@RequestBody Question question) {
 		return qrepo.save(question);
 	}
+	
+	@PostMapping("/{id}/options")
+	public @ResponseBody List<Option> saveQuestionWithOptionsRest(@PathVariable Long id, @RequestBody List<Option> options) {
+		Question question = qrepo.findById(id).get();
+		
+		for (Option option : options) {
+			option.setQuestion(question);
+			oprepo.save(option);
+		}
+		return qrepo.findById(id).get().getOptions();
+	}
 
+	
 	
 }
