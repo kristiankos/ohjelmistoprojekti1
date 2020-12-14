@@ -28,12 +28,6 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/addquestion")
-	public String addQuestion(Model model) {
-		model.addAttribute("question", new Question());
-
-		return "addquestion";
-	}
 
 	@RequestMapping(value = "/addsurvey")
 	public String addSurvey(Model model) {
@@ -42,11 +36,6 @@ public class UserController {
 		return "addsurvey";
 	}
 
-	@RequestMapping(value = "/savequestion", method = RequestMethod.POST)
-	public String saveQuestion(Question question) {
-		questionrepo.save(question);
-		return "login";
-	}
 
 	@RequestMapping(value = "/savesurvey", method = RequestMethod.POST)
 	public String saveSurvey(Survey survey) {
@@ -79,6 +68,18 @@ public class UserController {
 		return "redirect:../kyselylista";
 	}
 
+	@RequestMapping(value = "/addquestion/{id}")
+	public String addQuestion(@PathVariable("id") Long surveyId, Model model) {
+		Question question = new Question(surveyrepo.findById(surveyId).get(), null, null, null);
+		model.addAttribute("question", question);
+		
+		return "addquestion";
+	}
 
+	@RequestMapping(value = "/savequestion", method = RequestMethod.POST)
+	public String saveQuestion(Question question) {
+		questionrepo.save(question);
+		return "redirect:../kyselylista";
+	}
 
 }
