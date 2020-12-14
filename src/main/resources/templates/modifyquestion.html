@@ -67,7 +67,7 @@ footer {
     <div>
         <form th:object="${question}" th:action="@{../save}" action="#" method="post">
             <label for="id"></label>
-            <input type="hidden" id="id" th:field="*{questionid}" readonly="readonly" />
+            <input type="hidden" id="id" th:field="*{questionId}" readonly="readonly" />
             <div style="clear: both; display: block; height: 10px;"></div>
               <label for="nimi">Nimi</label>
             <input type="text" id="name" th:field="*{title}" />
@@ -92,7 +92,7 @@ footer {
         </table>
         
         
-        <a th:href="@{/addoption/{id}(id=${questionid})}" class="btn btn-danger">Lisää vaihtoehto</a>
+        <a th:href="@{/addoption/{id}(id=${questionId})}" class="btn btn-danger">Lisää vaihtoehto</a>
         
         
     </div>

@@ -20,7 +20,7 @@ public class Question {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long questionid;
+	private Long questionId;
 
 	@ManyToOne
 	@JsonIgnoreProperties("questions")
@@ -47,12 +47,12 @@ public class Question {
 		this.title = title;
 	}
 
-	public Long getQuestionid() {
-		return questionid;
+	public Long getQuestionId() {
+		return questionId;
 	}
 
-	public void setQuestionid(Long questionid) {
-		this.questionid = questionid;
+	public void setQuestionId(Long questionid) {
+		this.questionId = questionid;
 	}
 
 	public String getTitle() {
@@ -89,7 +89,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [questionid=" + questionid + ", survey=" + survey + ", questiontype=" + questiontype
+		return "Question [questionId=" + questionId + ", survey=" + survey + ", questiontype=" + questiontype
 				+ ", options=" + options + ", title=" + title + "]";
 	}
 

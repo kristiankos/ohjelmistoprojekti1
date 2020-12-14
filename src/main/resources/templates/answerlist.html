@@ -64,40 +64,30 @@ footer {
     
     <section>
 
+	<div>Vastaustapahtumien määrä:</div>
+	<p th:text="${maara}"></p>
     
     <table class="table table-striped"> 
         <tr>
             <th>Nimi</th>
-            <th>Aktiivinen</th>
             <th></th>
 
                 <th></th>
-    <div class="col-md-4">
-           <h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
-           <form th:action="@{/logout}" method="post" >
-                       <input type="submit" value="Sign Out"
-                       class="btn btn-warning"/>
-                       </form>
-
-                        </div>
+    
                        <br></br>
             
             
         </tr>  
         
-        <tr th:each = "kysely : ${kyselyt}">
-            <td th:text="${kysely.title}"></td>
-             <td th:text="${kysely.active}"></td>
-             <td><a th:href="@{/getanswers/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Tarkastele vastauksia</a></td>  
-             <td><a th:href="@{/active/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Muuta aktiivisuus</a></td>  
-            <td><a th:href="@{/deletesurvey/{id}(id=${kysely.surveyId})}"  class="btn btn-danger">Delete</a></td>            
-            <td><a th:href="@{/modifysurvey/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Modify</a></td>    
+        <tr th:each = "kysymys : ${questions}">
+            <td th:text="${kysymys.title}"></td> 
+            <td><a th:href="@{/getanswersbyquestion/{id}(id=${kysymys.questionId})}"  class="btn btn-warning">Tarkastele vastauksia</a></td>   
             
         </tr>
      </table>     
+    
    
     
-     <a href="/addsurvey" class="btn btn-success">Lisää kysely</a>
       <br></br>
     </section>
 </body>

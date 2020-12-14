@@ -62,7 +62,7 @@ footer {
 <body>
 	<h1>Lisää vaihtoehto</h1>
 	<div>
-		<form th:object="${option}" th:action="@{/saveoption/{id}(id=${questionid})}" action="#" method="post">
+		<form th:object="${option}" th:action="@{/saveoption/{id}(id=${questionId})}" action="#" method="post">
 			<label for="title">Value</label>
 			<input type="text" id="name" th:field="*{value}" />
 				
