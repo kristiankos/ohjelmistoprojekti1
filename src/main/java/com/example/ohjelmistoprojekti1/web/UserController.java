@@ -74,7 +74,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value= "/deletequestion/{id}")
-	public String deleteQuestion(@PathVariable("questionId") Long questionId) {
+	public String deleteQuestion(@PathVariable("id") Long questionId) {
 		questionrepo.deleteById(questionId);
 		return "redirect:../kyselylista";
 	}
