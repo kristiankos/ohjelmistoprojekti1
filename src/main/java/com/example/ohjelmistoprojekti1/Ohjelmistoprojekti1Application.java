@@ -46,7 +46,7 @@ public class Ohjelmistoprojekti1Application {
 			urepo.save(admin);
 			
 			// Pari esimerkki kyselyä
-			Survey kysely1 = new Survey("Kyselyn1 otsikko");
+			Survey kysely1 = new Survey("Radiokysely");
 			survrepo.save(kysely1);
 			
 			Question kysymys1 = new Question(kysely1, QuestionTypeEnum.RADIO, null, "Mitä kuuluu?");
@@ -72,7 +72,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-			Survey kysely2 = new Survey("Kyselyn2 otsikko");
+			Survey kysely2 = new Survey("Kysely avoimilla kysymyksillä");
 			survrepo.save(kysely2);
 			
 			Question kys3 = new Question(kysely2, QuestionTypeEnum.OPENTEXT, null, "Miten menee?");
@@ -84,7 +84,7 @@ public class Ohjelmistoprojekti1Application {
 
 			
 			
-			Survey kysely3 = new Survey("Kyselyn3 otsikko");
+			Survey kysely3 = new Survey("Kysely skaaloilla");
 			survrepo.save(kysely3);
 			
 			Question kys5 = new Question(kysely3, QuestionTypeEnum.SCALE, null, "Mikä fiilis?");
@@ -96,7 +96,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-			Survey kysely4 = new Survey("Kyselyn4 otsikko");
+			Survey kysely4 = new Survey("Kysely checkboxeilla");
 			survrepo.save(kysely4);
 			
 			Question kys7 = new Question(kysely4, QuestionTypeEnum.CHECKBOX, null, "Mitä näistä tykkäät tehdä?");
@@ -109,7 +109,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-			Survey kysely5 = new Survey("Kyselyn5 otsikko");
+			Survey kysely5 = new Survey("Monipuolinen kysely");
 			survrepo.save(kysely5);
 			
 			Question kys8 = new Question(kysely5, QuestionTypeEnum.RADIO, null, "Mikä näistä on lempiväri?");
