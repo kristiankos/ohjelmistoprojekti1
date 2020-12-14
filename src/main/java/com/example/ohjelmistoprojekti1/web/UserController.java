@@ -68,6 +68,18 @@ public class UserController {
 		return "redirect:../kyselylista";
 	}
 	
+	@RequestMapping(value = "/active/{id}", method = RequestMethod.GET)
+	public String changeActiveSurvey(@PathVariable("id") Long surveyId) {
+		Survey survey = surveyrepo.findById(surveyId).get();
+		if (survey.isActive()) {
+			survey.setActive(false);
+		} else {
+			survey.setActive(true);
+		}
+		surveyrepo.save(survey);
+		return "redirect:../kyselylista";
+	}
+	
 	@RequestMapping(value= "/deletequestion/{id}")
 	public String deleteQuestion(@PathVariable("id") Long questionId) {
 		questionrepo.deleteById(questionId);

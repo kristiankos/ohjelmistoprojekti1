@@ -21,7 +21,7 @@ public class Survey {
 	
 	private String title;
 	
-//	private boolean active;
+	private boolean active = true;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "survey")
 	@JsonIgnoreProperties("survey")
@@ -35,11 +35,13 @@ public class Survey {
 	
 	
 
-	public Survey(String title, List<Question> questions) {
+	public Survey(String title, boolean active, List<Question> questions) {
 		super();
 		this.title = title;
+		this.active = active;
 		this.questions = questions;
 	}
+
 
 
 
@@ -68,13 +70,13 @@ public class Survey {
 		this.title = title;
 	}
 
-//	public boolean isActive() {
-//		return active;
-//	}
+	public boolean isActive() {
+		return active;
+	}
 
-//	public void setActive(boolean active) {
-//		this.active = active;
-//	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 	public List<Question> getQuestions() {
 		return questions;
@@ -89,8 +91,14 @@ public class Survey {
 
 	@Override
 	public String toString() {
-		return "Survey [surveyId=" + surveyId + ", title=" + title + ", questions=" + questions + "]";
+		return "Survey [surveyId=" + surveyId + ", title=" + title + ", active=" + active + ", questions=" + questions
+				+ "]";
 	}
+
+
+
+
+
 	
 	
 	

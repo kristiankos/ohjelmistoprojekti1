@@ -1,5 +1,6 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,14 @@ public class SurveyController {
 
 	@GetMapping
 	public List<Survey> surveyListRest() {
-		return (List<Survey>) surveyrepo.findAll();
+		List<Survey> surveylist = (List<Survey>) surveyrepo.findAll();
+		List<Survey> surveys = new ArrayList<Survey>();
+		for(Survey survey : surveylist) {
+			if (survey.isActive()) {
+				surveys.add(survey);
+			}
+		}
+		return surveys;
 	}
 
 	@GetMapping("{id}")

@@ -68,6 +68,7 @@ footer {
     <table class="table table-striped"> 
         <tr>
             <th>Nimi</th>
+            <th>Aktiivinen</th>
             <th></th>
 
                 <th></th>
@@ -85,7 +86,9 @@ footer {
         </tr>  
         
         <tr th:each = "kysely : ${kyselyt}">
-            <td th:text="${kysely.title}"></td> 
+            <td th:text="${kysely.title}"></td>
+             <td th:text="${kysely.active}"></td>
+             <td><a th:href="@{/active/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Muuta aktiivisuus</a></td>  
             <td><a th:href="@{/deletesurvey/{id}(id=${kysely.surveyId})}"  class="btn btn-danger">Delete</a></td>            
             <td><a th:href="@{/modifysurvey/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Modify</a></td>    
             
