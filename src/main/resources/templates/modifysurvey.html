@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kyselyn muokkaus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+    <style>
+    
+    body {
+  	background:  url(
+  	[[@{https://mocah.org/uploads/posts/505930-beer.jpg}]])
+                    no-repeat center center fixed;  
+    }
+    
+    section {
+    
+    display: table;
+    clear: both;
+    background-color: lightgray;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 50px;
+    width: 100%;
+   
+    
+}
+    ul {
+ 	 list-style-type: none;
+ 	 margin: 20px;
+ 	 overflow: hidden;
+ 	 background-color: lightyellow;
+}
+li {
+  	float: left;
+  	margin: 5px;
+  	background-color: lightyellow;
+}
+h1, h2, h3, h6, p, a, input {
+	font-family: monospace;
+	font-style: normal;
+	font-variant: normal;
+}
+h1, h2, h6 {
+	text-align: center;
+}
+h1 {
+	background-color: lightgray;
+	position: sticky;
+	top: 0;
+}
+form {
+	background-color: lightgray;
+	position: sticky;
+	top: 2em;
+	margin: 20px;
+}
+footer {
+	text-align: right;
+}
+</style>
+<body>
+
+<a href="/kyselylista">Takaisin kyselyihin</a>
+    <h1>Muokkaa kyselyä</h1>
+    <section>
+    <div>
+        <form th:object="${survey}" th:action="@{../save}" action="#" method="post">
+            <label for="id"></label>
+            <input type="hidden" id="id" th:field="*{surveyId}" readonly="readonly" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+              <label for="nimi">Nimi</label>
+            <input type="text" id="name" th:field="*{title}" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+                <label for="description">Arvosana</label>
+            <input type="text" id="score" th:field="*{score}" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+             
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+            <label for="category">Category</label>
+            <select id="catlist" th:field="*{category}" class="form-control">
+
+            <option th:each="category: ${categories}" 
+                    th:value="${category.categoryId}" 
+                    th:text="${category.name}"></option>
+            </select><br>
+            <input class="btn btn-success" type="submit" value="Save"></input>
+        </form>
+        
+        <table class="table table-striped">
+        <tr>
+        <th>Title</th>
+        <th></th>
+        <th></th>
+        </tr>
+        <tr th:each = "kysymys : ${survey.questions}">
+            <td th:text="${kysymys.title}"></td> 
+            <td><a th:href="@{/deletequestion/{id}(id=${kysymys.questionId})}"  class="btn btn-danger">Delete</a></td>            
+            <td><a th:href="@{/modifyquestion/{id}(id=${kysymys.questionId})}"  class="btn btn-warning">Modify</a></td>    
+            
+        </tr>
+        </table>
+    </div>
+    </section>
+</body>
+</html>

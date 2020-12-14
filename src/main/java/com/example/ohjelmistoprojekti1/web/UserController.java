@@ -8,6 +8,7 @@ import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -55,6 +56,18 @@ public class UserController {
         public String kyselyLista(Model model) {
             model.addAttribute("kyselyt", surveyrepo.findAll());
             return "kyselylista";
+        }
+    
+    @RequestMapping(value="/modifysurvey/{id}")
+    public String editReview(@PathVariable("id") Long surveyId, Model model) {
+        model.addAttribute("survey", surveyrepo.findById(surveyId));
+        return "modifysurvey";
+    }
+    
+    @RequestMapping(value = "/deletesurvey/{id}", method = RequestMethod.GET)
+    public String deleteSurvey(@PathVariable("id") Long surveyId, Model model) {
+        surveyrepo.deleteById(surveyId);
+        return"redirect:../kyselylista";
         }
     
     }

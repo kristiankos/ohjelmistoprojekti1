@@ -87,8 +87,8 @@ footer {
         
         <tr th:each = "kysely : ${kyselyt}">
             <td th:text="${kysely.title}"></td> 
-            <td><a th:href="@{/delete/{id}(id=${kysely.surveyId})}"  class="btn btn-danger">Delete</a></td>            
-            <td><a th:href="@{/modify/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Modify</a></td>    
+            <td><a th:href="@{/deletesurvey/{id}(id=${kysely.surveyId})}"  class="btn btn-danger">Delete</a></td>            
+            <td><a th:href="@{/modifysurvey/{id}(id=${kysely.surveyId})}"  class="btn btn-warning">Modify</a></td>    
             
         </tr>
      </table>     
