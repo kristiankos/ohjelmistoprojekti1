@@ -11,39 +11,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Answer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long answerId;
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("answers")
-	private Question question;
-	
-	
+
+	private Long questionId;
+
 	private String value;
-	
-	
+
 	public Answer() {
 		super();
 	}
-	
-	
 
-	public Answer(Question question, String value) {
+	public Answer(Long questionId, String value) {
 		super();
-		this.question = question;
+		this.questionId = questionId;
 		this.value = value;
 	}
-
-
-
-	public Answer(String value) {
-		super();
-		this.value = value;
-	}
-
 
 	public Long getAnswerId() {
 		return answerId;
@@ -53,39 +38,25 @@ public class Answer {
 		this.answerId = answerId;
 	}
 
+	public Long getQuestionId() {
+		return questionId;
+	}
 
+	public void setQuestionId(Long questionId) {
+		this.questionId = questionId;
+	}
 
 	public String getValue() {
 		return value;
 	}
 
-
-
 	public void setValue(String value) {
 		this.value = value;
 	}
 
-
-	
-
-	public Question getQuestion() {
-		return question;
-	}
-
-
-
-	public void setQuestion(Question question) {
-		this.question = question;
-	}
-
-
-
 	@Override
 	public String toString() {
-		return "Answer [answerId=" + answerId + ", question=" + question + ", value=" + value
-				+ "]";
+		return "Answer [answerId=" + answerId + ", questionId=" + questionId + ", value=" + value + "]";
 	}
 
-
-	
 }

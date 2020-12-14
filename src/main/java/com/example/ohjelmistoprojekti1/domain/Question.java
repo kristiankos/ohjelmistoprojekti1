@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -27,37 +26,18 @@ public class Question {
 	@JsonIgnoreProperties("questions")
 	private Survey survey;
 
-//	@ManyToOne
-//	@JsonIgnoreProperties("questions")
-//	private QuestionType questionType;
-	
 	@Enumerated(EnumType.STRING)
 	private QuestionTypeEnum questiontype;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	@JsonIgnoreProperties("question")
 	private List<Option> options;
-	
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-	@JsonIgnoreProperties("question")
-	private List<Answer> answers;
 
 	private String title;
 
 	public Question() {
 		super();
 	}
-
-
-
-	public Question(QuestionTypeEnum questiontype, String title) {
-		super();
-		this.questiontype = questiontype;
-		this.title = title;
-	}
-
-
 
 	public Question(Survey survey, QuestionTypeEnum questiontype, List<Option> options, String title) {
 		super();
@@ -66,30 +46,6 @@ public class Question {
 		this.options = options;
 		this.title = title;
 	}
-
-
-
-	public Question(Survey survey, QuestionTypeEnum questiontype, List<Option> options, List<Answer> answers,
-			String title) {
-		super();
-		this.survey = survey;
-		this.questiontype = questiontype;
-		this.options = options;
-		this.answers = answers;
-		this.title = title;
-	}
-
-
-
-
-	public Question(Survey survey, QuestionTypeEnum questiontype, String title) {
-		super();
-		this.survey = survey;
-		this.questiontype = questiontype;
-		this.title = title;
-	}
-
-
 
 	public Long getQuestionid() {
 		return questionid;
@@ -123,39 +79,19 @@ public class Question {
 		this.options = options;
 	}
 
-
-	
-
 	public QuestionTypeEnum getQuestiontype() {
 		return questiontype;
 	}
-
-
 
 	public void setQuestiontype(QuestionTypeEnum questiontype) {
 		this.questiontype = questiontype;
 	}
 
-
-
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-
-
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
-
-
-
 	@Override
 	public String toString() {
 		return "Question [questionid=" + questionid + ", survey=" + survey + ", questiontype=" + questiontype
-				+ ", options=" + options + ", answers=" + answers + ", title=" + title + "]";
+				+ ", options=" + options + ", title=" + title + "]";
 	}
-	
-	
 
+	
 }

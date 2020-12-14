@@ -1,5 +1,6 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ohjelmistoprojekti1.domain.Answer;
+import com.example.ohjelmistoprojekti1.domain.AnswerRepository;
 import com.example.ohjelmistoprojekti1.domain.Option;
 import com.example.ohjelmistoprojekti1.domain.OptionRepository;
 import com.example.ohjelmistoprojekti1.domain.Question;
@@ -26,6 +29,9 @@ public class QuestionController {
 	
 	@Autowired
 	private OptionRepository oprepo;
+	
+	@Autowired
+	private AnswerRepository ansrepo;
 
 	@GetMapping
 	public List<Question> questionListRest() {
@@ -53,6 +59,12 @@ public class QuestionController {
 		return qrepo.findById(id).get().getOptions();
 	}
 
+	
+	
+	@GetMapping("/{id}/answers")
+	public @ResponseBody List<Answer> getAnswersByQuestionRest(@PathVariable Long id){
+		return (List<Answer>) ansrepo.findAllByquestionId(id);
+	}
 	
 	
 }

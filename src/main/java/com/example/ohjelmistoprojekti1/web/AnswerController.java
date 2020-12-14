@@ -25,7 +25,6 @@ public class AnswerController {
 		return (List<Answer>) answerrepo.findAll();
 	}
 	
-	@CrossOrigin
 	@PostMapping
 	public Answer saveAnswerRest(@RequestBody Answer answer) {
 		return answerrepo.save(answer);
