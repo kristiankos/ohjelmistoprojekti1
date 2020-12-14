@@ -70,9 +70,7 @@ public class UserController {
 
 	@RequestMapping(value = "/addquestion/{id}")
 	public String addQuestion(@PathVariable("id") Long surveyId, Model model) {
-		Question question = new Question(surveyrepo.findById(surveyId).get(), null, null, null);
-		model.addAttribute("question", question);
-		
+		model.addAttribute("question", new Question());
 		return "addquestion";
 	}
 
