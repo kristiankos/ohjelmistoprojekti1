@@ -73,12 +73,6 @@ public class UserController {
 		return "redirect:../kyselylista";
 	}
 
-	
 
-	@RequestMapping(value = "/modifysurvey/{surveyId}/deletequestion/{questionId}", method = RequestMethod.GET)
-	public String deleteQuestion(@PathVariable("questionid") Long questionId, @PathVariable("surveyid") Long surveyId, Model model) {
-		questionrepo.deleteById(questionId);
-		return "redirect:../modifysurvey/{surveyId}";
-	}
 
 }
