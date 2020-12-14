@@ -20,7 +20,7 @@ import com.example.ohjelmistoprojekti1.domain.Survey;
 import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @RequestMapping(value = "/surveys")
 public class SurveyController {
 

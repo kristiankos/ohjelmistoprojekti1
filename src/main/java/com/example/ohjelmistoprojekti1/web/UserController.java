@@ -17,60 +17,68 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-    @Autowired
-    private SurveyRepository surveyrepo;
+	@Autowired
+	private SurveyRepository surveyrepo;
 
-    @Autowired
-    private QuestionRepository questionrepo;
-    
-    @RequestMapping( value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
-    }
+	@Autowired
+	private QuestionRepository questionrepo;
 
-    @RequestMapping(value= "/addquestion")
-    public String addQuestion(Model model) {
-        model.addAttribute("question", new Question());
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
 
-        return "addquestion";
-    }
+	@RequestMapping(value = "/addquestion")
+	public String addQuestion(Model model) {
+		model.addAttribute("question", new Question());
 
-    @RequestMapping(value="/addsurvey")
-    public String addSurvey(Model model) {
-        model.addAttribute("survey", new Survey());
+		return "addquestion";
+	}
 
-        return "addsurvey";
-    }
+	@RequestMapping(value = "/addsurvey")
+	public String addSurvey(Model model) {
+		model.addAttribute("survey", new Survey());
 
-    @RequestMapping(value="/savequestion", method = RequestMethod.POST)
-    public String saveQuestion(Question question) {
-        questionrepo.save(question);
-        return "login";
-    }
+		return "addsurvey";
+	}
 
-    @RequestMapping(value= "/savesurvey", method = RequestMethod.POST) 
-        public String saveSurvey(Survey survey) {
-            surveyrepo.save(survey);
-            return "redirect:kyselylista";
-        }
-    
-    @RequestMapping(value="/kyselylista")
-        public String kyselyLista(Model model) {
-            model.addAttribute("kyselyt", surveyrepo.findAll());
-            return "kyselylista";
-        }
-    
-    @RequestMapping(value="/modifysurvey/{id}")
-    public String editReview(@PathVariable("id") Long surveyId, Model model) {
-        model.addAttribute("survey", surveyrepo.findById(surveyId));
-        model.addAttribute("questions", surveyrepo.findById(surveyId).get().getQuestions());
-        return "modifysurvey";
-    }
-    
-    @RequestMapping(value = "/deletesurvey/{id}", method = RequestMethod.GET)
-    public String deleteSurvey(@PathVariable("id") Long surveyId, Model model) {
-        surveyrepo.deleteById(surveyId);
-        return"redirect:../kyselylista";
-        }
-    
-    }
+	@RequestMapping(value = "/savequestion", method = RequestMethod.POST)
+	public String saveQuestion(Question question) {
+		questionrepo.save(question);
+		return "login";
+	}
+
+	@RequestMapping(value = "/savesurvey", method = RequestMethod.POST)
+	public String saveSurvey(Survey survey) {
+		surveyrepo.save(survey);
+		return "redirect:kyselylista";
+	}
+
+	@RequestMapping(value = "/kyselylista")
+	public String kyselyLista(Model model) {
+		model.addAttribute("kyselyt", surveyrepo.findAll());
+		return "kyselylista";
+	}
+
+	@RequestMapping(value = "/modifysurvey/{id}")
+	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
+		model.addAttribute("survey", surveyrepo.findById(surveyId));
+		model.addAttribute("questions", surveyrepo.findById(surveyId).get().getQuestions());
+		return "modifysurvey";
+	}
+
+	@RequestMapping(value = "/deletesurvey/{id}", method = RequestMethod.GET)
+	public String deleteSurvey(@PathVariable("id") Long surveyId, Model model) {
+		surveyrepo.deleteById(surveyId);
+		return "redirect:../kyselylista";
+	}
+
+	
+
+	@RequestMapping(value = "/modifysurvey/{surveyId}/deletequestion/{questionId}", method = RequestMethod.GET)
+	public String deleteQuestion(@PathVariable("questionid") Long questionId, @PathVariable("surveyid") Long surveyId, Model model) {
+		questionrepo.deleteById(questionId);
+		return "redirect:../modifysurvey/{surveyId}";
+	}
+
+}

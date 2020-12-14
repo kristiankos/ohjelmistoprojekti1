@@ -19,7 +19,7 @@ import com.example.ohjelmistoprojekti1.domain.AnsweredSurvey;
 import com.example.ohjelmistoprojekti1.domain.AnsweredSurveyRepository;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 public class AnsSurController {
 	
 	@Autowired
