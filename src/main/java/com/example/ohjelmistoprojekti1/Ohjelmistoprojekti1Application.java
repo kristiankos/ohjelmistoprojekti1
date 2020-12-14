@@ -109,7 +109,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			
-			Survey kysely5 = new Survey("Kyselyn5 otsikko");
+			Survey kysely5 = new Survey("Kyselyn 5 otsikko");
 			survrepo.save(kysely5);
 			
 			Question kys8 = new Question(kysely5, QuestionTypeEnum.RADIO, null, "Mikä näistä on lempiväri?");
