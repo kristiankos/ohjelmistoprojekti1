@@ -5,6 +5,8 @@ import com.example.ohjelmistoprojekti1.domain.QuestionRepository;
 import com.example.ohjelmistoprojekti1.domain.Survey;
 import com.example.ohjelmistoprojekti1.domain.SurveyRepository;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,8 +62,10 @@ public class UserController {
     
     @RequestMapping(value="/modifysurvey/{id}")
     public String editReview(@PathVariable("id") Long surveyId, Model model) {
-        model.addAttribute("survey", surveyrepo.findById(surveyId));
-        return "testi";
+    	Optional<Survey> survey = surveyrepo.findById(surveyId);
+        model.addAttribute("survey", survey);
+        model.addAttribute("questions", survey.get().getQuestions());
+        return "modifysurvey";
     }
     
     @RequestMapping(value = "/deletesurvey/{id}", method = RequestMethod.GET)
