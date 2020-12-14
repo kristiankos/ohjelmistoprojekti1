@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface AnswerRepository extends CrudRepository<Answer, Long>{
+public interface AnsweredSurveyRepository extends CrudRepository<AnsweredSurvey, Long>{
 	
-	List<Answer> findAllByquestionId(Long questionId);
+
 
 }
