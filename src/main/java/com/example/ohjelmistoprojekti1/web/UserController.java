@@ -1,5 +1,7 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import com.example.ohjelmistoprojekti1.domain.Option;
+import com.example.ohjelmistoprojekti1.domain.OptionRepository;
 import com.example.ohjelmistoprojekti1.domain.Question;
 import com.example.ohjelmistoprojekti1.domain.QuestionRepository;
 import com.example.ohjelmistoprojekti1.domain.Survey;
@@ -22,6 +24,9 @@ public class UserController {
 
 	@Autowired
 	private QuestionRepository questionrepo;
+	
+	@Autowired
+	private OptionRepository optionrepo;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
@@ -53,6 +58,7 @@ public class UserController {
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
 		model.addAttribute("survey", surveyrepo.findById(surveyId));
 		model.addAttribute("questions", surveyrepo.findById(surveyId).get().getQuestions());
+		model.addAttribute("surveyId", surveyId);
 		return "modifysurvey";
 	}
 
@@ -70,14 +76,45 @@ public class UserController {
 
 	@RequestMapping(value = "/addquestion/{id}")
 	public String addQuestion(@PathVariable("id") Long surveyId, Model model) {
-		model.addAttribute("question", new Question());
+		Question question = new Question();
+		model.addAttribute("question", question);
+		model.addAttribute("surveyId", surveyId);
 		return "addquestion";
 	}
+	
+	@RequestMapping(value = "/addoption/{id}")
+	public String addOption(@PathVariable("id") Long questionid, Model model) {
+		Option option = new Option();
+		model.addAttribute("option", option);
+		model.addAttribute("questionid", questionid);
+		return "addoption";
+	}
 
-	@RequestMapping(value = "/savequestion", method = RequestMethod.POST)
-	public String saveQuestion(Question question) {
+
+	@RequestMapping(value = "/savequestion/{id}", method = RequestMethod.POST)
+	public String saveQuestion(@PathVariable("id") Long surveyId, Question question) {
+		Survey survey = surveyrepo.findById(surveyId).get();
+		question.setSurvey(survey);
 		questionrepo.save(question);
+		
 		return "redirect:../kyselylista";
+	}
+	
+	@RequestMapping(value = "/saveoption/{id}", method = RequestMethod.POST)
+	public String saveOption(@PathVariable("id") Long questionid, Option option) {
+		Question question = questionrepo.findById(questionid).get();
+		option.setQuestion(question);
+		optionrepo.save(option);
+		
+		return "redirect:../kyselylista";
+	}
+	
+	@RequestMapping(value = "/modifyquestion/{id}")
+	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
+		model.addAttribute("question", questionrepo.findById(questionId));
+		model.addAttribute("options", questionrepo.findById(questionId).get().getOptions());
+		model.addAttribute("questionid", questionId);
+		return "modifyquestion";
 	}
 
 }
