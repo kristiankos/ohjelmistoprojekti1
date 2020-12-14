@@ -61,7 +61,7 @@ public class UserController {
     @RequestMapping(value="/modifysurvey/{id}")
     public String editReview(@PathVariable("id") Long surveyId, Model model) {
         model.addAttribute("survey", surveyrepo.findById(surveyId));
-        return "modifysurvey";
+        return "testi";
     }
     
     @RequestMapping(value = "/deletesurvey/{id}", method = RequestMethod.GET)

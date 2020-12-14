@@ -74,22 +74,6 @@ footer {
             <div style="clear: both; display: block; height: 10px;"></div>
 
 
-
-            <div style="clear: both; display: block; height: 10px;"></div>
-                <label for="description">Arvosana</label>
-            <input type="text" id="score" th:field="*{score}" />
-            <div style="clear: both; display: block; height: 10px;"></div>
-             
-
-            <div style="clear: both; display: block; height: 10px;"></div>
-            <label for="category">Category</label>
-            <select id="catlist" th:field="*{category}" class="form-control">
-
-            <option th:each="category: ${categories}" 
-                    th:value="${category.categoryId}" 
-                    th:text="${category.name}"></option>
-            </select><br>
-            <input class="btn btn-success" type="submit" value="Save"></input>
         </form>
         
         <table class="table table-striped">
