@@ -50,4 +50,6 @@ public class UserController {
             surveyrepo.save(survey);
             return "redirect";
         }
+    
+    //@RequestMapping(value="/kyselylista")
     }
