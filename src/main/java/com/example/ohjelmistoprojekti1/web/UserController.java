@@ -62,9 +62,8 @@ public class UserController {
     
     @RequestMapping(value="/modifysurvey/{id}")
     public String editReview(@PathVariable("id") Long surveyId, Model model) {
-    	Optional<Survey> survey = surveyrepo.findById(surveyId);
-        model.addAttribute("survey", survey);
-        model.addAttribute("questions", survey.get().getQuestions());
+        model.addAttribute("survey", surveyrepo.findById(surveyId));
+        model.addAttribute("questions", surveyrepo.findById(surveyId).get().getQuestions());
         return "modifysurvey";
     }
     
