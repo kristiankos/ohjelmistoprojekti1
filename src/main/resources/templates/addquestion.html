@@ -1,10 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Bookstore</title>
+<title>Lisää kysymys</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>You can create surveys here</h1>
+	<h1>Lisää kysymys</h1>
+	<div>
+		<form th:object="${question}" th:action="@{savequestion}" action="#" method="post">
+			<label for="title">Title</label>
+			<input type="text" id="name" th:field="*{title}" />
+			<label for="type">QuestionType</label>
+			<select id="typelist" th:field="*{questiontype}">
+				<option th:each="type : ${T(com.example.ohjelmistoprojekti1.domain.QuestionTypeEnum).values()}"
+					th:value="${type}" th:text="${type}"></option>
+			</select>
+
+			<input type="submit" value="Save"/>
+			
+		</form>
+	</div>
 </body>
 </html>

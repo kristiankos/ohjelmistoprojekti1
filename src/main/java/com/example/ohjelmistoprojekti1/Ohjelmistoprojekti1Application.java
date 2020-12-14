@@ -40,7 +40,7 @@ public class Ohjelmistoprojekti1Application {
 		return (args) -> {
 			log.info("saving");
 			//Luodaan admin käyttäjä
-			User admin = new User("admin","admin","ADMIN");
+			User admin = new User("admin","$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C","ADMIN");
 			urepo.save(admin);
 			
 			// Pari esimerkki kyselyä
