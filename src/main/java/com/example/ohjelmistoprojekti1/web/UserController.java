@@ -42,7 +42,7 @@ public class UserController {
     @RequestMapping(value="/savequestion", method = RequestMethod.POST)
     public String saveQuestion(Question question) {
         questionrepo.save(question);
-        return "";
+        return "login";
     }
 
     @RequestMapping(value= "/savesurvey", method = RequestMethod.POST) 
@@ -51,5 +51,9 @@ public class UserController {
             return "redirect";
         }
     
-    //@RequestMapping(value="/kyselylista")
+    @RequestMapping(value="/kyselylista")
+        public String kyselyLista(Model model) {
+            model.addAttribute("kyselyt", surveyrepo.findAll());
+            return "kyselylista";
+        }
     }
